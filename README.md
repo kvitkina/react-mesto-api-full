@@ -3,5 +3,5 @@
 Бэкенд - в директории `backend/`, а фронтенд - в `frontend/`. 
   
 
-# Публичный IP-адрес сервера 178.154.235.114
-# Домен https://kvitkina.students.nomoreparties.space/
+### Публичный IP-адрес сервера 178.154.235.114
+### Домен https://kvitkina.students.nomoreparties.space/
