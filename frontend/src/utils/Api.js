@@ -73,9 +73,9 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://kvitkina.students.nomoreparties.space/',
+  baseUrl: 'https://api.kvitkina.students.nomoreparties.space/',
   headers: {
-    authorization: 'e63db112-531a-4c6f-ae02-ccc048d1696b',
+    authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
   },
 })
