@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 const bodyParser = require('body-parser');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
