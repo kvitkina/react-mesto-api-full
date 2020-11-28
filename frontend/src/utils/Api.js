@@ -72,12 +72,10 @@ class Api {
   }
 }
 
-const getToken = (token) => {
-  return localStorage.getItem(token)
-}
+const getToken = () => localStorage.getItem('jwt');
 
 const api = new Api({
-  baseUrl: 'https://api.kvitkina.students.nomoreparties.space/',
+  baseUrl: 'https://api.kvitkina.students.nomoreparties.space',
   headers: {
     'Authorization': `Bearer ${getToken()}`,
     'Content-Type': 'application/json',
