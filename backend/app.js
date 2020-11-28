@@ -13,7 +13,7 @@ const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
+const cors = require('cors');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -69,6 +69,7 @@ app.use((err, req, res, next) => { // централизованный обра�
         : message,
     });
 });
+app.use(cors());
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
