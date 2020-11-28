@@ -72,10 +72,14 @@ class Api {
   }
 }
 
+const getToken = (token) => {
+  return localStorage.getItem(token)
+}
+
 const api = new Api({
   baseUrl: 'https://api.kvitkina.students.nomoreparties.space/',
   headers: {
-    authorization: 'e63db112-531a-4c6f-ae02-ccc048d1696b',
+    'Authorization': `Bearer ${getToken()}`,
     'Content-Type': 'application/json',
   },
 })
