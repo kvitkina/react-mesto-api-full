@@ -23,6 +23,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
+app.use(cors());
 app.use(requestLogger); // логгер запросов
 
 //краш-тест
@@ -69,7 +70,6 @@ app.use((err, req, res, next) => { // централизованный обра�
         : message,
     });
 });
-app.use(cors());
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
