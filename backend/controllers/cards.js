@@ -4,15 +4,14 @@ const BadRequestError = require('../errors/bad-request-err');
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .populate('owner')
     .then((cards) => res.send(cards))
     .catch(next);
 };
 
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
-  const { _id } = req.user;
-  Card.create({ name, link, owner: _id })
+  const { id } = req.user;
+  Card.create({ name, link, owner: id })
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {

@@ -33,7 +33,7 @@ const App = () => {
 
   React.useEffect(() => {
     handleTokenCheck()
-  })
+  },[])
 
   const onRegister = (email, password) => {
     auth.register(email, password)
@@ -75,7 +75,7 @@ const App = () => {
     auth.checkToken(jwt)
     .then((res) => {
         setLoggedIn(true)
-        setEmail(res.data.email)
+        setEmail(res.email)
         history.push('/');
     })
     .catch(err => {
@@ -93,10 +93,12 @@ const App = () => {
     history.push('/signin');
   }
 
-  
 
   React.useEffect(() => {
-    api
+    if(!loggedIn) {
+      return
+    }
+      api
       .getAllInfo()
       .then((res) => {
         const [dataCards, dataProfile] = res
@@ -106,7 +108,7 @@ const App = () => {
       .catch((err) => {
         console.log(err)
       })
-  }, [])
+  }, [loggedIn])
 
   React.useEffect(() => {
     const handleEscClose = (evt) => {
@@ -183,10 +185,11 @@ const App = () => {
   }
 
   const handleAddPlaceSubmit = (newCard) => {
+    console.log(newCard)
     api
       .addCard(newCard)
       .then((newCard) => {
-        setCards([newCard, ...cards])
+        setCards([...cards, newCard])
         closeAllPopups()
       })
       .catch((err) => {
@@ -242,7 +245,6 @@ const App = () => {
             cards={cards}
             component={Main}
           />
-          <Route exact path="/"><Footer /></Route>
           <Route path="/sign-in">
             <Login 
               name="login"
@@ -260,6 +262,7 @@ const App = () => {
             />
           </Route>
           </Switch>
+          <Route exact path="/"><Footer /></Route>
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}

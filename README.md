@@ -4,4 +4,5 @@
   
 
 ### Публичный IP-адрес сервера 178.154.235.114
-### Домен https://kvitkina.students.nomoreparties.space/
+### Frontend https://kvitkina.students.nomoreparties.space/
+### Backend https://api.kvitkina.students.nomoreparties.space/
