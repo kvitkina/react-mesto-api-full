@@ -7,13 +7,14 @@ const PORT = 3001;
 const bodyParser = require('body-parser');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const cardsRoutes = require('./routes/cards.js');
 const usersRoutes = require('./routes/users.js');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/not-found-err');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const cors = require('cors');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -26,7 +27,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 app.use(cors());
 app.use(requestLogger); // логгер запросов
 
-//краш-тест
+// краш-тест
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
@@ -55,6 +56,7 @@ app.use(auth); // защита роутов
 
 app.use('/', usersRoutes);
 app.use('/', cardsRoutes);
+// eslint-disable-next-line no-unused-vars
 app.use('*', (req, res) => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
@@ -72,6 +74,7 @@ app.use((err, req, res, next) => { // централизованный обра�
         ? 'На сервере произошла ошибка'
         : message,
     });
+  next();
 });
 
 app.listen(PORT, () => {

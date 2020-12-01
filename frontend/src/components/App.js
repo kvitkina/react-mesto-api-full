@@ -185,7 +185,6 @@ const App = () => {
   }
 
   const handleAddPlaceSubmit = (newCard) => {
-    console.log(newCard)
     api
       .addCard(newCard)
       .then((newCard) => {
