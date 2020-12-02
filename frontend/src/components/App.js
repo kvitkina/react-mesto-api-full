@@ -112,12 +112,6 @@ const App = () => {
           .getUserInfo(token)
           .then((res) => { setCurrentUser(res); });
       })
-      // .getAllInfo()
-      // .then((res) => {
-      //   const [dataCards, dataProfile] = res;
-      //   setCards(dataCards);
-      //   setCurrentUser(dataProfile);
-      // })
       .catch((err) => {
         console.log(err);
       });
