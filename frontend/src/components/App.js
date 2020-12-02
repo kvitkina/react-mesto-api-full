@@ -167,7 +167,7 @@ const App = () => {
 
   const handleCardDelete = (id) => {
     api
-      .deleteCard(id)
+      .deleteCard(id, token)
       .then(() => {
         const newCards = cards.filter((item) => item._id !== id);
         setCards(newCards);
@@ -179,7 +179,7 @@ const App = () => {
 
   const handleUpdateUser = (data) => {
     api
-      .setUserInfo(data)
+      .setUserInfo(data, token)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -191,7 +191,7 @@ const App = () => {
 
   const handleUpdateAvatar = (data) => {
     api
-      .editAvatar(data)
+      .editAvatar(data, token)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -203,7 +203,7 @@ const App = () => {
 
   const handleAddPlaceSubmit = (newCard) => {
     api
-      .addCard(newCard)
+      .addCard(newCard, token)
       .then((newCard) => {
         setCards([...cards, newCard]);
         closeAllPopups();
