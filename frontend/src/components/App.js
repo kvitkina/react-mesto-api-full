@@ -31,6 +31,7 @@ const App = () => {
   const [email, setEmail] = React.useState('');
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [tooltipStatus, setTooltipStatus] = React.useState('');
+  const [token, setToken] = React.useState('');
   const history = useHistory();
 
   const handleTooltip = () => {
@@ -74,6 +75,7 @@ const App = () => {
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
+      setToken(jwt);
       auth.checkToken(jwt)
         .then((res) => {
           setLoggedIn(true);
@@ -104,12 +106,18 @@ const App = () => {
       return;
     }
     api
-      .getAllInfo()
-      .then((res) => {
-        const [dataCards, dataProfile] = res;
-        setCards(dataCards);
-        setCurrentUser(dataProfile);
+      .getInitialCards(token).then((res) => { setCards(res); })
+      .then(() => {
+        api
+          .getUserInfo(token)
+          .then((res) => { setCurrentUser(res); });
       })
+      // .getAllInfo()
+      // .then((res) => {
+      //   const [dataCards, dataProfile] = res;
+      //   setCards(dataCards);
+      //   setCurrentUser(dataProfile);
+      // })
       .catch((err) => {
         console.log(err);
       });
