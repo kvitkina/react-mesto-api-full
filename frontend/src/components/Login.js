@@ -1,19 +1,20 @@
 import React from 'react';
 
-function Login ({ name, title, submit, onLogin }) {
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  
+function Login({
+  name, title, submit, onLogin,
+}) {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const handleEmailChange = (e) => {
-    setEmail(e.target.value)
-  }
+    setEmail(e.target.value);
+  };
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
   const handleSubmit = (e) => {
-    e.preventDefault()
-    onLogin(email, password)
-  }
+    e.preventDefault();
+    onLogin(email, password);
+  };
   return (
     <section className="popup popup_theme_sign">
     <div className="popup__container popup__container_theme_sign">
@@ -48,12 +49,12 @@ function Login ({ name, title, submit, onLogin }) {
         />
         <span className="popup__input-error" id="password-error"></span>
       </div>
-          <input type="submit" className="popup__button popup__button_theme_sign" value={submit}  />
+          <input type="submit" className="popup__button popup__button_theme_sign" value={submit} />
         </fieldset>
       </form>
       </div>
   </section>
-  )
+  );
 }
 
-export default Login
+export default Login;

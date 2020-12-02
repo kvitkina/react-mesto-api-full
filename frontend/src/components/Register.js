@@ -1,21 +1,24 @@
 import React from 'react';
+// eslint-disable-next-line no-unused-vars
 import { Link } from 'react-router-dom';
 
-function Register ({ name, title, submit, onRegister }) {
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+function Register({
+  name, title, submit, onRegister,
+}) {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value)
-  }
+    setEmail(e.target.value);
+  };
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    onRegister(email, password)
-  }
+    e.preventDefault();
+    onRegister(email, password);
+  };
 
   return (
     <section className="popup popup_theme_sign">
@@ -51,7 +54,7 @@ function Register ({ name, title, submit, onRegister }) {
         />
         <span className="popup__input-error" id="password-error"></span>
       </div>
-          <input type="submit" className="popup__button popup__button_theme_register" value={submit}  />
+          <input type="submit" className="popup__button popup__button_theme_register" value={submit} />
         </fieldset>
       </form>
       </div>
@@ -61,7 +64,7 @@ function Register ({ name, title, submit, onRegister }) {
           </p>
         </div>
   </section>
-  )
+  );
 }
 
-export default Register
+export default Register;

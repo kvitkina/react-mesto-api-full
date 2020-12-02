@@ -16,71 +16,97 @@ class Api {
     return Promise.all([this.getInitialCards(), this.getUserInfo()]);
   }
 
-  getInitialCards() {
+  getInitialCards(token) {
     return fetch(`${this.baseUrl}/cards`, {
-      headers: this.headers,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     }).then(this.handleOriginalResponse);
   }
 
-  setUserInfo(item) {
+  setUserInfo(item, token) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(item),
     }).then(this.handleOriginalResponse);
   }
 
-  editAvatar(item) {
+  editAvatar(item, token) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this.headers,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(item),
     }).then(this.handleOriginalResponse);
   }
 
-  putLike(id) {
+  putLike(id, token) {
     return fetch(`${this.baseUrl}/cards/likes/${id}`, {
       method: 'PUT',
-      headers: this.headers,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     }).then(this.handleOriginalResponse);
   }
 
-  removeLike(id) {
+  removeLike(id, token) {
     return fetch(`${this.baseUrl}/cards/likes/${id}`, {
       method: 'DELETE',
-      headers: this.headers,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     }).then(this.handleOriginalResponse);
   }
 
-  addCard(item) {
+  addCard(item, token) {
     return fetch(`${this.baseUrl}/cards`, {
       method: 'POST',
-      headers: this.headers,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(item),
     }).then(this.handleOriginalResponse);
   }
 
-  deleteCard(id) {
+  deleteCard(id, token) {
     return fetch(`${this.baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: this.headers,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     }).then(this.handleOriginalResponse);
   }
 
-  getUserInfo() {
+  getUserInfo(token) {
     return fetch(`${this.baseUrl}/users/me`, {
-      headers: this.headers,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     }).then(this.handleOriginalResponse);
   }
 }
 
-const getToken = () => localStorage.getItem('jwt');
-
 const api = new Api({
   baseUrl: 'https://api.kvitkina.students.nomoreparties.space',
-  headers: {
-    Authorization: `Bearer ${getToken()}`,
-    'Content-Type': 'application/json',
-  },
 });
 export default api;

@@ -1,4 +1,5 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React from 'react';
 
 function ImagePopup({ card, onClose, name }) {
   return (
@@ -9,7 +10,7 @@ function ImagePopup({ card, onClose, name }) {
         <button className="popup__close" onClick={onClose} />
       </div>
     </section>
-  )
+  );
 }
 
-export default ImagePopup
+export default ImagePopup;

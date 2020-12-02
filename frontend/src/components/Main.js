@@ -1,6 +1,7 @@
-import React from 'react'
-import Card from './Card'
-import { CurrentUserContext } from '../contexts/CurrentUserContext'
+import React from 'react';
+// eslint-disable-next-line no-unused-vars
+import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main({
   onEditAvatar,
@@ -12,7 +13,7 @@ function Main({
   onCardDislike,
   onCardDelete,
 }) {
-  const currentUser = React.useContext(CurrentUserContext)
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <main className="content">
@@ -45,7 +46,7 @@ function Main({
         </ul>
       </div>
     </main>
-  )
+  );
 }
 
-export default Main
+export default Main;

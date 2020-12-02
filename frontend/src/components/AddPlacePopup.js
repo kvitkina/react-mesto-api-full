@@ -1,18 +1,19 @@
-import React from 'react'
-import PopupWithForm from './PopupWithForm'
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ onClose, isOpen, onAddPlace }) {
-  const nameRef = React.useRef()
-  const linkRef = React.useRef()
+  const nameRef = React.useRef();
+  const linkRef = React.useRef();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
     onAddPlace({
       name: nameRef.current.value,
       link: linkRef.current.value,
-    })
-  }
+    });
+  };
 
   return (
     <PopupWithForm
@@ -50,6 +51,6 @@ function AddPlacePopup({ onClose, isOpen, onAddPlace }) {
         <span className="popup__input-error" id="link-error"></span>
       </div>
     </PopupWithForm>
-  )
+  );
 }
-export default AddPlacePopup
+export default AddPlacePopup;

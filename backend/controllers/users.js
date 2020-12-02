@@ -7,7 +7,6 @@ const { SOLT_ROUND } = require('../configs/index');
 const { NODE_ENV, JWT_SECRET } = process.env;
 const NotFoundError = require('../errors/not-found-err');
 const BadRequestError = require('../errors/bad-request-err');
-const UnauthorizedError = require('../errors/unauthorized-err');
 
 module.exports.getUsers = (req, res, next) => {
   User.find()
@@ -98,7 +97,6 @@ module.exports.login = (req, res, next) => {
       return Promise.reject(new Error('Неправильные почта или пароль'));
     })
     .catch((err) => {
-      const unauthorizedError = new UnauthorizedError('Ошибка авторизации');
-      next(unauthorizedError);
+      next(err);
     });
 };

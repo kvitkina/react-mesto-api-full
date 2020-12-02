@@ -1,15 +1,16 @@
-import React from 'react'
-import PopupWithForm from './PopupWithForm'
+import React from 'react';
+// eslint-disable-next-line no-unused-vars
+import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-  const avatarRef = React.useRef()
+  const avatarRef = React.useRef();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     onUpdateAvatar({
       avatar: avatarRef.current.value,
-    })
-  }
+    });
+  };
 
   return (
     <PopupWithForm
@@ -33,7 +34,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
         <span className="popup__input-error" id="link-error"></span>
       </div>
     </PopupWithForm>
-  )
+  );
 }
 
-export default EditAvatarPopup
+export default EditAvatarPopup;

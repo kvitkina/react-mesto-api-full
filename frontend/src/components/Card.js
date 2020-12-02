@@ -1,26 +1,28 @@
-import React from 'react'
-import { CurrentUserContext } from '../contexts/CurrentUserContext'
+import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Card({ card, onCardClick, onCardDelete, onCardLike, onCardDislike }) {
-  const currentUser = React.useContext(CurrentUserContext)
+function Card({
+  card, onCardClick, onCardDelete, onCardLike, onCardDislike,
+}) {
+  const currentUser = React.useContext(CurrentUserContext);
 
-  const isOwn = card.owner === currentUser._id // Определяем, являемся ли мы владельцем текущей карточки
+  const isOwn = card.owner === currentUser._id;
 
-  const isLiked = card.likes.some((i) => i._id === currentUser._id) // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
+  const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-  const cardLikeButtonClassName = `element__like ${isLiked && 'element__like_theme_black'}`
+  const cardLikeButtonClassName = `element__like ${isLiked && 'element__like_theme_black'}`;
   const handleClick = () => {
-    onCardClick(card)
-  }
+    onCardClick(card);
+  };
   const handleDeleteClick = () => {
-    onCardDelete(card._id)
-  }
+    onCardDelete(card._id);
+  };
   const handleLikeClick = () => {
-    onCardLike(card)
-  }
+    onCardLike(card);
+  };
   const handleDislikeClick = () => {
-    onCardDislike(card)
-  }
+    onCardDislike(card);
+  };
 
   return (
     <li className="element">
@@ -42,7 +44,7 @@ function Card({ card, onCardClick, onCardDelete, onCardLike, onCardDislike }) {
         </div>
       </div>
     </li>
-  )
+  );
 }
 
-export default Card
+export default Card;

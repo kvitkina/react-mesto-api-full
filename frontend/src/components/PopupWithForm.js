@@ -1,9 +1,12 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React from 'react';
 
-function PopupWithForm({ isOpen, children, onClose, name, title, submit, onSubmit }) {
+function PopupWithForm({
+  isOpen, children, onClose, name, title, submit, onSubmit,
+}) {
   return (
     <section
-      className={`popup popup_${name} ${isOpen && `popup_opened`} `}
+      className={`popup popup_${name} ${isOpen && 'popup_opened'} `}
       onClick={(evt) => (evt.target !== evt.currentTarget) && onClose }
     >
       <div className="popup__container">
@@ -17,7 +20,7 @@ function PopupWithForm({ isOpen, children, onClose, name, title, submit, onSubmi
         </form>
       </div>
     </section>
-  )
+  );
 }
 
-export default PopupWithForm
+export default PopupWithForm;

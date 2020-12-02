@@ -1,7 +1,7 @@
-import React from 'react'
-import logo from '../images/logo-mesto.svg'
+/* eslint-disable no-unused-vars */
+import React from 'react';
 import { Link, Route } from 'react-router-dom';
-
+import logo from '../images/logo-mesto.svg';
 
 function Header({ email, onSignOut }) {
   return (
@@ -28,7 +28,7 @@ function Header({ email, onSignOut }) {
       </Route>
       </div>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;

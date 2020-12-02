@@ -1,32 +1,33 @@
-import React from 'react'
-import PopupWithForm from './PopupWithForm'
-import { CurrentUserContext } from '../contexts/CurrentUserContext'
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import PopupWithForm from './PopupWithForm';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-  const [name, setName] = React.useState('')
-  const [description, setDescription] = React.useState('')
-  const currentUser = React.useContext(CurrentUserContext)
+  const [name, setName] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const currentUser = React.useContext(CurrentUserContext);
 
   const handleNameChange = (e) => {
-    setName(e.target.value)
-  }
+    setName(e.target.value);
+  };
   const handleJobChange = (e) => {
-    setDescription(e.target.value)
-  }
+    setDescription(e.target.value);
+  };
 
   React.useEffect(() => {
-    setName(currentUser.name)
-    setDescription(currentUser.about)
-  }, [currentUser])
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
       name,
       about: description,
-    })
-  }
+    });
+  };
 
   return (
     <PopupWithForm
@@ -68,7 +69,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         <span className="popup__input-error" id="job-error"></span>
       </div>
     </PopupWithForm>
-  )
+  );
 }
 
-export default EditProfilePopup
+export default EditProfilePopup;

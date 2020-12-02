@@ -1,17 +1,20 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
-import success from '../images/success.svg'
-import fail from '../images/fail.svg'
+import success from '../images/success.svg';
+import fail from '../images/fail.svg';
 
-const InfoTooltip = ({ tooltipStatus, onClose, isOpen, message, errMessage }) => {
+function InfoTooltip({
+  tooltipStatus, onClose, isOpen, message, errMessage,
+}) {
   return (
     <section
-      className={`popup ${isOpen && `popup_opened`} `}
+      className={`popup ${isOpen && 'popup_opened'} `}
       onClick={(evt) => (evt.target !== evt.currentTarget) && onClose }
     >
       <div className="popup__container">
         <button className="popup__close" onClick={onClose} />
-        <img 
-          className="popup__icon" 
+        <img
+          className="popup__icon"
           src={ tooltipStatus ? success : fail }
           alt="Tooltip"
         />
@@ -20,7 +23,7 @@ const InfoTooltip = ({ tooltipStatus, onClose, isOpen, message, errMessage }) =>
         </h2>
       </div>
     </section>
-  )
+  );
 }
 
-export default InfoTooltip
+export default InfoTooltip;
