@@ -107,6 +107,6 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://api.kvitkina.students.nomoreparties.space',
+  baseUrl: process.env.REACT_APP_API_URL || 'http://localhost:3001',
 });
 export default api;
