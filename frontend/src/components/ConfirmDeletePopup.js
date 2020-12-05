@@ -3,7 +3,7 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function ConfirmDeletePopup({
-  cardId, isOpen, onClose, onSubmit,
+  cardId, isOpen, onClose, onSubmit, onOverlayClose,
 }) {
   const handleConfirm = (e) => {
     e.preventDefault();
@@ -18,6 +18,7 @@ function ConfirmDeletePopup({
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleConfirm}
+      onOverlayClose={onOverlayClose}
     />
 
   );

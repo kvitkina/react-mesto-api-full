@@ -2,7 +2,9 @@ import React from 'react';
 // eslint-disable-next-line no-unused-vars
 import PopupWithForm from './PopupWithForm';
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
+function EditAvatarPopup({
+  isOpen, onClose, onUpdateAvatar, onOverlayClose,
+}) {
   const avatarRef = React.useRef();
 
   const handleSubmit = (e) => {
@@ -20,6 +22,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      onOverlayClose={onOverlayClose}
     >
       <div className="popup__input-container">
         <input
