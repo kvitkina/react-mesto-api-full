@@ -78,9 +78,11 @@ const App = () => {
       setToken(jwt);
       auth.checkToken(jwt)
         .then((res) => {
-          setLoggedIn(true);
-          setEmail(res.email);
-          history.push('/');
+          if (res) {
+            setLoggedIn(true);
+            setEmail(res.email);
+            history.push('/');
+          }
         })
         .catch((err) => {
           if (err.status === 401) {
@@ -102,19 +104,15 @@ const App = () => {
   };
 
   React.useEffect(() => {
-    if (!loggedIn) {
-      return;
+    if (loggedIn) {
+      const jwt = localStorage.getItem('jwt');
+      api.getInitialCards(jwt)
+        .then((res) => { setCards(res); })
+        .catch((err) => console.log(err));
+      api.getUserInfo(jwt)
+        .then((res) => { setCurrentUser(res); })
+        .catch((err) => console.log(err));
     }
-    api
-      .getInitialCards(token).then((res) => { setCards(res); })
-      .then(() => {
-        api
-          .getUserInfo(token)
-          .then((res) => { setCurrentUser(res); });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }, [loggedIn]);
 
   const closeAllPopups = () => {
@@ -138,31 +136,34 @@ const App = () => {
     };
   }, []);
 
+  const handleOverlayClose = (e) => {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+    closeAllPopups();
+  };
+
   const handleCardLike = (card) => {
     // eslint-disable-next-line max-len
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .putLike(card._id, !isLiked)
       .then((newCard) => {
         const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
         setCards(newCards);// Обновляем стейт
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleCardDislike = (card) => {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .removeLike(card._id, !isLiked)
       .then((newCard) => {
         const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
         setCards(newCards); // Обновляем стейт
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleCardDelete = (id) => {
@@ -172,9 +173,7 @@ const App = () => {
         const newCards = cards.filter((item) => item._id !== id);
         setCards(newCards);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleUpdateUser = (data) => {
@@ -184,9 +183,7 @@ const App = () => {
         setCurrentUser(res);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleUpdateAvatar = (data) => {
@@ -196,9 +193,7 @@ const App = () => {
         setCurrentUser(res);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleAddPlaceSubmit = (newCard) => {
@@ -208,9 +203,7 @@ const App = () => {
         setCards([...cards, newCard]);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleEditAvatarClick = () => {
@@ -271,24 +264,33 @@ const App = () => {
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
+            onOverlayClose={handleOverlayClose}
           />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
+            onOverlayClose={handleOverlayClose}
           />
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onAddPlace={handleAddPlaceSubmit}
+            onOverlayClose={handleOverlayClose}
           />
           <ConfirmDeletePopup
             isOpen={isDeletePopupOpen}
             onClose={closeAllPopups}
             cardId={cardToDelete}
             onSubmit={handleCardDelete}
+            onOverlayClose={handleOverlayClose}
           />
-          <ImagePopup name="photo-zoom" card={selectedCard} onClose={closeAllPopups} />
+          <ImagePopup
+            name="photo-zoom"
+            card={selectedCard}
+            onClose={closeAllPopups}
+            onOverlayClose={handleOverlayClose}
+          />
           <InfoTooltip
             isOpen={isInfoTooltipOpen}
             onClose={closeAllPopups}
